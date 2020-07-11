@@ -23,12 +23,6 @@ public class LinkedListDeque<T> {
 
     }
 
-    public LinkedListDeque(T item) {
-        sentinel = new Node(null, null, null);
-        sentinel.next = new Node(sentinel, item, sentinel);
-        sentinel.prev = sentinel.next;
-        size = 1;
-    }
 
     /**Adds x to the front of the deque.*/
     public void addFirst(T item) {
