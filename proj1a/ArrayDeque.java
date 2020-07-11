@@ -89,7 +89,7 @@ public class ArrayDeque<T> {
         items[firstIndex] = null;
         nextFirst = firstIndex;
         size = size - 1;
-        if (items.length>=16 && size/items.length < USAGE_RATIO) {
+        if (items.length>=16 && size < USAGE_RATIO * items.length) {
             resize(items.length/2);
         }
         return firstItem;
@@ -106,7 +106,7 @@ public class ArrayDeque<T> {
         nextLast = lastIndex;
         size = size - 1;
 
-        if (items.length>=16 && size/items.length < USAGE_RATIO) {
+        if (items.length>=16 && size< USAGE_RATIO * items.length) {
             resize(items.length/2);
         }
         return lastItem;
