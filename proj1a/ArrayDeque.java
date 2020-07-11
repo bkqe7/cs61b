@@ -14,10 +14,13 @@ public class ArrayDeque<T> {
     }
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        System.arraycopy(items,0,a,0,nextLast);
-        System.arraycopy(items,nextFirst+1,a,capacity - size+nextFirst,size-nextFirst);
+        for(int i =0;i<size;i=i+1) {
+            int pos = plusOne(i+nextFirst);
+            a[i] = items[pos];
+        }
         items = a;
-        nextFirst = nextFirst+capacity-size;
+        nextFirst = capacity-1;
+        nextLast = size;
     }
 
     public void addFirst(T item) {
@@ -30,7 +33,7 @@ public class ArrayDeque<T> {
 
     }
     private int minusOne(int index) {
-        return (index-1+items.length)%items.length;
+        return (index-1)%items.length;
     }
 
     public void addLast(T item) {
@@ -43,7 +46,7 @@ public class ArrayDeque<T> {
 
     }
     private int plusOne(int index) {
-        return (index+1+items.length)%items.length;
+        return (index+1)%items.length;
     }
 
     public boolean isEmpty() {
@@ -64,6 +67,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if(size ==0) {
+            return null;
+        }
         int firstIndex = plusOne(nextFirst);
         T firstItem = items[firstIndex];
         items[firstIndex] = null;
@@ -73,6 +79,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if(size==0) {
+            return null;
+        }
         int lastIndex = minusOne(nextLast);
         T lastItem = items[lastIndex];
         items[lastIndex] = null;
