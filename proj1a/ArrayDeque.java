@@ -33,7 +33,7 @@ public class ArrayDeque<T> {
 
     }
     private int minusOne(int index) {
-        return (index-1)%items.length;
+        return (index-1+items.length)%items.length;
     }
 
     public void addLast(T item) {
