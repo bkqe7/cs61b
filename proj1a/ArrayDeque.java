@@ -5,6 +5,7 @@ public class ArrayDeque<T> {
     private int size;
     private static final int INIT_CAPACITY = 8;
     private static final int RFACTOR = 2;
+    private static final double USAGE_RATIO = 0.25;
 
     /** Creates an empty array deque. */
     public ArrayDeque() {
@@ -88,6 +89,9 @@ public class ArrayDeque<T> {
         items[firstIndex] = null;
         nextFirst = firstIndex;
         size = size - 1;
+        if (items.length>=16 && size/items.length < USAGE_RATIO) {
+            resize(items.length/2);
+        }
         return firstItem;
     }
 
@@ -101,6 +105,10 @@ public class ArrayDeque<T> {
         items[lastIndex] = null;
         nextLast = lastIndex;
         size = size - 1;
+
+        if (items.length>=16 && size/items.length < USAGE_RATIO) {
+            resize(items.length/2);
+        }
         return lastItem;
     }
 
